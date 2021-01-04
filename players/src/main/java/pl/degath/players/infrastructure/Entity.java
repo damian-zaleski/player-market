@@ -6,10 +6,6 @@ public abstract class Entity {
 
     private final UUID id;
 
-    public Entity(UUID id) {
-        this.id = id;
-    }
-
     public Entity() {
         this.id = UUID.randomUUID();
     }
