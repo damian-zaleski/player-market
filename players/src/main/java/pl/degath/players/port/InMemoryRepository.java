@@ -1,6 +1,8 @@
 package pl.degath.players.port;
 
 import pl.degath.players.infrastructure.Entity;
+import pl.degath.players.infrastructure.Page;
+import pl.degath.players.infrastructure.Pagination;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,6 +22,22 @@ public class InMemoryRepository<T extends Entity> implements Repository<T> {
     @Override
     public List<T> getAll() {
         return List.copyOf(entities.values());
+    }
+
+    @Override
+    public Page<T> getAll(Pagination pagination) {
+        int size = entities.size();
+        Pagination.IndexRange range = pagination.calculateRange(size);
+        List<T> result = getPaginatedResult(range);
+        return pagination.result(result, size);
+    }
+
+    private List<T> getPaginatedResult(Pagination.IndexRange range) {
+        return Optional.ofNullable(range)
+                .filter(r -> r.getFirst() <= r.getLast())
+                .map(indexRange -> getAll()
+                        .subList(range.getFirst(), range.getLast()))
+                .orElse(List.of());
     }
 
     @Override

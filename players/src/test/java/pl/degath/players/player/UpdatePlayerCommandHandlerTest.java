@@ -23,12 +23,15 @@ class UpdatePlayerCommandHandlerTest {
     private Repository<Player> playerRepository;
     private Repository<Team> teamRepository;
     private CommandHandler<UpdatePlayer> updatePlayerCommandHandler;
+    private PlayerBuilder playerBuilder;
 
     @BeforeEach
     void setUp() {
         playerRepository = new InMemoryRepository<>();
         teamRepository = new InMemoryRepository<>();
         updatePlayerCommandHandler = new UpdatePlayerCommandHandler(playerRepository, teamRepository);
+        playerBuilder = new PlayerBuilder(playerRepository, teamRepository);
+
     }
 
     @Test
@@ -51,13 +54,17 @@ class UpdatePlayerCommandHandlerTest {
 
         assertThat(thrown)
                 .isInstanceOf(PlayerNotFoundException.class)
-                .hasMessage("Player with id ac8fad99-43c5-4c1a-90e1-b9e8c12bbfae does not exist.");
+                .hasMessage("Player with id [ac8fad99-43c5-4c1a-90e1-b9e8c12bbfae] does not exist.");
     }
 
     @Test
     void updatePlayer_notUniqueName_throwsException() {
-        UUID existingPlayerId = new PlayerBuilder(playerRepository, teamRepository).withName("John Snow").inDb().getId();
-        String alreadyUsedName = new PlayerBuilder(playerRepository, teamRepository).withName("Tom Smith").inDb().getName();
+        UUID existingPlayerId = playerBuilder.withName("John Snow")
+                .inDb()
+                .getId();
+        String alreadyUsedName = playerBuilder.withName("Tom Smith")
+                .inDb()
+                .getName();
         UpdatePlayer commandWithNotUniqueName = new UpdatePlayer(existingPlayerId, alreadyUsedName, null);
 
         Throwable thrown = catchThrowable(() -> updatePlayerCommandHandler.handle(commandWithNotUniqueName));
@@ -69,7 +76,7 @@ class UpdatePlayerCommandHandlerTest {
 
     @Test
     void updatePlayer_byNotExistingTeam_throwsException() {
-        UUID existingPlayerId = new PlayerBuilder(playerRepository, teamRepository)
+        UUID existingPlayerId = playerBuilder
                 .withName("John Snow")
                 .inDb()
                 .getId();

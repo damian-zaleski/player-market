@@ -11,7 +11,7 @@ public final class PlayerBuilder {
     private final Repository<Player> playerRepository;
     private final Repository<Team> teamRepository;
     private final Team team = new Team("Best Team Ever");
-    private final UUID teamId = team.getId();
+    private UUID teamId = team.getId();
 
     private String playerName = "Jan Kowalski";
 
@@ -22,6 +22,11 @@ public final class PlayerBuilder {
 
     public PlayerBuilder withName(String newName) {
         this.playerName = newName;
+        return this;
+    }
+
+    public PlayerBuilder withTeamId(UUID teamId) {
+        this.teamId = teamId;
         return this;
     }
 
