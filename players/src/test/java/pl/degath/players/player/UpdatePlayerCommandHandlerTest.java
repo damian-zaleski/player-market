@@ -54,7 +54,7 @@ class UpdatePlayerCommandHandlerTest {
 
         assertThat(thrown)
                 .isInstanceOf(PlayerNotFoundException.class)
-                .hasMessage("Player with id ac8fad99-43c5-4c1a-90e1-b9e8c12bbfae does not exist.");
+                .hasMessage("Player with id [ac8fad99-43c5-4c1a-90e1-b9e8c12bbfae] does not exist.");
     }
 
     @Test

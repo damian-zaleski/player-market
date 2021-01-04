@@ -23,5 +23,4 @@ public interface Repository<T extends Entity> {
     void remove(UUID id);
 
     boolean existsBy(Predicate<T> predicate);
-
 }

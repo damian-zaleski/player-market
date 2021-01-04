@@ -5,12 +5,14 @@ import pl.degath.players.infrastructure.QueryHandler;
 import pl.degath.players.player.query.GetAllPlayers;
 import pl.degath.players.port.Repository;
 
+import java.util.Objects;
+
 public class GetAllPlayersQueryHandler implements QueryHandler<GetAllPlayers, Page<Player>> {
 
     private final Repository<Player> playerRepository;
 
     public GetAllPlayersQueryHandler(Repository<Player> playerRepository) {
-        this.playerRepository = playerRepository;
+        this.playerRepository = Objects.requireNonNull(playerRepository, "Player repository has to be specified.");
     }
 
     @Override

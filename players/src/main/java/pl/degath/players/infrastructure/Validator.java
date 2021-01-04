@@ -1,7 +1,6 @@
 package pl.degath.players.infrastructure;
 
 public class Validator {
-
     private Validator() {
         throw new AssertionError();
     }

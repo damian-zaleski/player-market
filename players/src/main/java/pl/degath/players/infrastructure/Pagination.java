@@ -49,14 +49,6 @@ public class Pagination {
         return Math.min(lastIndexBasedOnFirst, size);
     }
 
-    public int getItemsPerPage() {
-        return itemsPerPage;
-    }
-
-    public int getPageNumber() {
-        return pageNumber;
-    }
-
     public static class IndexRange {
         private final int first;
         private final int last;
