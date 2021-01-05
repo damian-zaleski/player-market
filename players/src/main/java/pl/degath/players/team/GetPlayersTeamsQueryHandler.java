@@ -1,6 +1,6 @@
 package pl.degath.players.team;
 
-import pl.degath.players.infrastructure.QueryHandler;
+import pl.degath.shared.infrastructure.QueryHandler;
 import pl.degath.players.player.Player;
 import pl.degath.players.player.exception.PlayerNotFoundException;
 import pl.degath.players.port.Repository;

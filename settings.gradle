@@ -1,3 +1,5 @@
 rootProject.name = 'player-market'
 include 'players'
+include 'transfer'
+include 'shared'
 

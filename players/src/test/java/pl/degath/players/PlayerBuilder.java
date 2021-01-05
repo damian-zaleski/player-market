@@ -4,6 +4,8 @@ import pl.degath.players.player.Player;
 import pl.degath.players.port.Repository;
 import pl.degath.players.team.Team;
 
+import java.time.Year;
+import java.time.YearMonth;
 import java.util.UUID;
 
 public final class PlayerBuilder {
@@ -31,7 +33,7 @@ public final class PlayerBuilder {
     }
 
     private Player build() {
-        return new Player(playerName, teamId);
+        return new Player(playerName, teamId, Year.of(2010), YearMonth.of(2010, 10));
     }
 
     public Player inDb() {

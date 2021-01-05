@@ -1,7 +1,7 @@
 package pl.degath.players.player;
 
-import pl.degath.players.infrastructure.Page;
-import pl.degath.players.infrastructure.QueryHandler;
+import pl.degath.shared.infrastructure.Page;
+import pl.degath.shared.infrastructure.QueryHandler;
 import pl.degath.players.player.query.GetAllPlayers;
 import pl.degath.players.port.Repository;
 

@@ -1,6 +1,6 @@
 package pl.degath.players.team.command;
 
-import pl.degath.players.infrastructure.Command;
+import pl.degath.shared.infrastructure.Command;
 
 import java.util.Objects;
 import java.util.UUID;

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.degath.players.PlayerBuilder;
 import pl.degath.players.TeamBuilder;
-import pl.degath.players.infrastructure.CommandHandler;
+import pl.degath.shared.infrastructure.CommandHandler;
 import pl.degath.players.player.command.AddPlayer;
 import pl.degath.players.player.exception.PlayerAlreadyExistsException;
 import pl.degath.players.port.InMemoryRepository;
@@ -12,6 +12,8 @@ import pl.degath.players.port.Repository;
 import pl.degath.players.team.Team;
 import pl.degath.players.team.exception.TeamNotFoundException;
 
+import java.time.Year;
+import java.time.YearMonth;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -33,7 +35,7 @@ class AddPlayerCommandHandlerTest {
 
     @Test
     void addPlayer_withValidExistingTeam_addsPlayer() {
-        AddPlayer commandWithValidParams = new AddPlayer("name", this.existingTeamId());
+        AddPlayer commandWithValidParams = new AddPlayer("name", this.existingTeamId(), YearMonth.of(2010,10), Year.of(2010));
 
         addPlayerHandler.handle(commandWithValidParams);
 
@@ -42,7 +44,7 @@ class AddPlayerCommandHandlerTest {
 
     @Test
     void addPlayer_withNotExistingTeam_throwsException() {
-        AddPlayer playerToAddWithNotExistingTeamId = new AddPlayer("name", NOT_EXISTING_TEAM_ID);
+        AddPlayer playerToAddWithNotExistingTeamId = new AddPlayer("name", NOT_EXISTING_TEAM_ID, YearMonth.of(2010,10), Year.of(2010));
 
         Throwable thrown = catchThrowable(() -> addPlayerHandler.handle(playerToAddWithNotExistingTeamId));
 
@@ -55,7 +57,7 @@ class AddPlayerCommandHandlerTest {
     @Test
     void addPlayer_withAlreadyExistingPlayerName_throwsException() {
         this.existingPlayer();
-        AddPlayer commandWithAlreadyExistingPlayerName = new AddPlayer("Robert Lewandowski", NOT_EXISTING_TEAM_ID);
+        AddPlayer commandWithAlreadyExistingPlayerName = new AddPlayer("Robert Lewandowski", NOT_EXISTING_TEAM_ID, YearMonth.of(2010,10), Year.of(2010));
 
         Throwable thrown = catchThrowable(() -> addPlayerHandler.handle(commandWithAlreadyExistingPlayerName));
 

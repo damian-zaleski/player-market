@@ -1,6 +1,6 @@
 package pl.degath.players.player;
 
-import pl.degath.players.infrastructure.CommandHandler;
+import pl.degath.shared.infrastructure.CommandHandler;
 import pl.degath.players.player.command.RemovePlayer;
 import pl.degath.players.port.Repository;
 

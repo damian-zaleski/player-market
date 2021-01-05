@@ -3,7 +3,7 @@ package pl.degath.players.team;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.degath.players.TeamBuilder;
-import pl.degath.players.infrastructure.CommandHandler;
+import pl.degath.shared.infrastructure.CommandHandler;
 import pl.degath.players.port.InMemoryRepository;
 import pl.degath.players.port.Repository;
 import pl.degath.players.team.command.AddTeam;
