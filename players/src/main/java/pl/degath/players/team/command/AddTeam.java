@@ -1,7 +1,7 @@
 package pl.degath.players.team.command;
 
-import pl.degath.players.infrastructure.Command;
-import pl.degath.players.infrastructure.Validator;
+import pl.degath.shared.infrastructure.Command;
+import pl.degath.shared.infrastructure.Validator;
 
 public class AddTeam implements Command {
     private final String teamName;

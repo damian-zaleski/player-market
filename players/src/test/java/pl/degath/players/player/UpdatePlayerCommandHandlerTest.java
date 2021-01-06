@@ -4,7 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.degath.players.PlayerBuilder;
 import pl.degath.players.TeamBuilder;
-import pl.degath.players.infrastructure.CommandHandler;
+import pl.degath.shared.infrastructure.CommandHandler;
 import pl.degath.players.player.command.UpdatePlayer;
 import pl.degath.players.player.exception.PlayerAlreadyExistsException;
 import pl.degath.players.player.exception.PlayerNotFoundException;

@@ -1,12 +1,11 @@
 package pl.degath.players.port;
 
-import pl.degath.players.infrastructure.Entity;
-import pl.degath.players.infrastructure.Page;
-import pl.degath.players.infrastructure.Pagination;
+import pl.degath.shared.infrastructure.Entity;
+import pl.degath.shared.infrastructure.Page;
+import pl.degath.shared.infrastructure.Pagination;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.UUID;
 import java.util.function.Predicate;
 

@@ -1,4 +1,4 @@
-package pl.degath.players.infrastructure;
+package pl.degath.shared.infrastructure;
 
 import java.util.UUID;
 

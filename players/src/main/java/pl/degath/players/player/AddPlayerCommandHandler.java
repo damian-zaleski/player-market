@@ -1,11 +1,11 @@
 package pl.degath.players.player;
 
-import pl.degath.players.infrastructure.CommandHandler;
 import pl.degath.players.player.command.AddPlayer;
 import pl.degath.players.player.exception.PlayerAlreadyExistsException;
 import pl.degath.players.port.Repository;
 import pl.degath.players.team.Team;
 import pl.degath.players.team.exception.TeamNotFoundException;
+import pl.degath.shared.infrastructure.CommandHandler;
 
 import java.util.Objects;
 import java.util.Optional;
@@ -25,8 +25,10 @@ public class AddPlayerCommandHandler implements CommandHandler<AddPlayer> {
     public void handle(AddPlayer command) {
         this.validatePlayerName(command.getName());
         this.validateTeamExistenceIfSpecified(command.getTeamId());
+        //todo validate year of birth. probably 18+
+        //todo validate career start. probably after birth before today
 
-        Player newPlayer = new Player(command.getName(), command.getTeamId());
+        Player newPlayer = new Player(command.getName(), command.getTeamId(), command.getYearOfBirth(), command.getCareerStart());
         playerRepository.save(newPlayer);
     }
 

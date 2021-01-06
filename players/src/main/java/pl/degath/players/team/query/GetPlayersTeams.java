@@ -1,6 +1,6 @@
 package pl.degath.players.team.query;
 
-import pl.degath.players.infrastructure.Query;
+import pl.degath.shared.infrastructure.Query;
 
 import java.util.Set;
 import java.util.UUID;

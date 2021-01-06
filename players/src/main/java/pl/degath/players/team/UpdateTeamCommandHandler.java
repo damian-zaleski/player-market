@@ -1,6 +1,6 @@
 package pl.degath.players.team;
 
-import pl.degath.players.infrastructure.CommandHandler;
+import pl.degath.shared.infrastructure.CommandHandler;
 import pl.degath.players.port.Repository;
 import pl.degath.players.team.command.UpdateTeam;
 import pl.degath.players.team.exception.TeamAlreadyExistsException;

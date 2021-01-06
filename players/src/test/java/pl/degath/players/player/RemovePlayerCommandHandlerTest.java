@@ -3,7 +3,7 @@ package pl.degath.players.player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import pl.degath.players.PlayerBuilder;
-import pl.degath.players.infrastructure.CommandHandler;
+import pl.degath.shared.infrastructure.CommandHandler;
 import pl.degath.players.player.command.RemovePlayer;
 import pl.degath.players.port.InMemoryRepository;
 import pl.degath.players.port.Repository;
