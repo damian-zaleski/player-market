@@ -1,6 +1,7 @@
 package pl.degath.shared.infrastructure;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Currency;
 
 public class Money {
@@ -8,7 +9,7 @@ public class Money {
     private final Currency currency;
 
     public Money(BigDecimal amount, Currency currency) {
-        this.amount = amount;
+        this.amount = amount.setScale(2, RoundingMode.HALF_EVEN);
         this.currency = currency;
     }
 
