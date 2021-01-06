@@ -30,6 +30,7 @@ public class AddPlayerCommandHandler implements CommandHandler<AddPlayer> {
 
         Player newPlayer = new Player(command.getName(), command.getTeamId(), command.getYearOfBirth(), command.getCareerStart());
         playerRepository.save(newPlayer);
+        //todo consider automatically create account to simplify the whole process
     }
 
     private void validatePlayerName(String playerName) {

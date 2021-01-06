@@ -1,9 +1,9 @@
 package pl.degath.players.team;
 
-import pl.degath.shared.infrastructure.CommandHandler;
 import pl.degath.players.port.Repository;
 import pl.degath.players.team.command.AddTeam;
 import pl.degath.players.team.exception.TeamAlreadyExistsException;
+import pl.degath.shared.infrastructure.CommandHandler;
 
 import java.util.Objects;
 
@@ -21,6 +21,7 @@ public class AddTeamCommandHandler implements CommandHandler<AddTeam> {
 
         Team newTeam = new Team(command.getTeamName());
         teamRepository.save(newTeam);
+        //todo consider automatically create account to simplify the whole process
     }
 
     private void validateUniqueName(String teamName) {

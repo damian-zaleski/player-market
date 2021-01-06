@@ -1,10 +1,9 @@
 package pl.degath.transfer;
 
-import java.util.UUID;
+import pl.degath.shared.infrastructure.Entity;
 
-public class Transfer {
+public class Transfer extends Entity {
 
-    private final UUID id;
     private final Player player;
     private final Team buyer;
     private final ContractFee contractFee;
@@ -13,14 +12,9 @@ public class Transfer {
     private boolean playerSold = false;
 
     public Transfer(Player player, Team buyer, ContractFee contractFee) {
-        this.id = UUID.randomUUID();
         this.player = player;
         this.buyer = buyer;
         this.contractFee = contractFee;
-    }
-
-    public UUID getId() {
-        return id;
     }
 
     public Player getPlayer() {

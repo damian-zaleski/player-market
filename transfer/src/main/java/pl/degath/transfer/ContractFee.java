@@ -3,14 +3,14 @@ package pl.degath.transfer;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
-import java.util.Objects;
 
 class ContractFee {
     private static final BigDecimal ONE_HUNDRED = new BigDecimal(100);
 
     //todo move these two to properties, as it should be configurable...
     private static final int MEANINGFUL_NAME_FOR_MAGIC_NUMBER = 100000;
-    private static final BigDecimal MAXIMUM_COMMISSION_PERCENT = new BigDecimal(10);
+    private static final BigDecimal MAXIMUM_COMMISSION_PERCENT = new BigDecimal(10)
+            .setScale(0, RoundingMode.HALF_EVEN);
 
     private final BigDecimal transferFee;
     private final BigDecimal commissionFee;
@@ -34,7 +34,7 @@ class ContractFee {
     }
 
     public static BigDecimal percentageFrom(BigDecimal base, BigDecimal pct) {
-        return base.multiply(pct).divide(ONE_HUNDRED, RoundingMode.HALF_DOWN);
+        return base.multiply(pct).divide(ONE_HUNDRED, RoundingMode.HALF_EVEN);
     }
 
     public BigDecimal getTransferFee() {
