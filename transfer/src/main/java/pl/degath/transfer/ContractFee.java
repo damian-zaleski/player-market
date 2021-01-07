@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Currency;
 
-class ContractFee {
+public class ContractFee {
     private static final BigDecimal ONE_HUNDRED = new BigDecimal(100);
 
     //todo move these two to properties, as it should be configurable...
@@ -15,6 +15,12 @@ class ContractFee {
     private final BigDecimal transferFee;
     private final BigDecimal commissionFee;
     private final Currency currency;
+
+    public ContractFee(BigDecimal transferFee, BigDecimal commissionFee, Currency currency) {
+        this.transferFee = transferFee;
+        this.commissionFee = commissionFee;
+        this.currency = currency;
+    }
 
     public ContractFee(Player player, BigDecimal commissionPercentage, Currency currency) {
         this.transferFee = calculateTransferFee(player.getMonthsOfExperience(), player.getAge());

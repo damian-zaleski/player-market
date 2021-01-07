@@ -3,6 +3,7 @@ package pl.degath.players;
 import pl.degath.players.port.Repository;
 import pl.degath.players.team.Team;
 
+import java.util.Currency;
 import java.util.UUID;
 
 public class TeamBuilder {
@@ -20,7 +21,7 @@ public class TeamBuilder {
     }
 
     private Team build() {
-        return new Team(UUID.randomUUID(), teamName);
+        return new Team(UUID.randomUUID(), teamName, Currency.getInstance("USD"));
     }
 
     public Team inDb() {

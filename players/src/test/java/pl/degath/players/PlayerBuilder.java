@@ -6,13 +6,13 @@ import pl.degath.players.team.Team;
 
 import java.time.Year;
 import java.time.YearMonth;
+import java.util.Currency;
 import java.util.UUID;
 
 public final class PlayerBuilder {
-
     private final Repository<Player> playerRepository;
     private final Repository<Team> teamRepository;
-    private final Team team = new Team(UUID.randomUUID(), "Best Team Ever");
+    private final Team team = new Team(UUID.randomUUID(), "Best Team Ever", Currency.getInstance("USD"));
     private UUID teamId = team.getId();
 
     private String playerName = "Jan Kowalski";

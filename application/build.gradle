@@ -15,9 +15,10 @@ bootRun {
 }
 
 dependencies {
+    implementation project(':shared')
     implementation project(':players')
     implementation project(':banking')
-    implementation project(':shared')
+    implementation project(':transfer')
 
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.boot:spring-boot-starter-web'

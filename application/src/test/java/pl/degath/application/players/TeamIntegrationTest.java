@@ -21,8 +21,7 @@ public class TeamIntegrationTest extends RestIntegrationTest {
 
     @Test
     void add() {
-        AddTeamRequest request = new AddTeamRequest(
-                "Super Team");
+        AddTeamRequest request = new AddTeamRequest("Super Team", "USD");
 
         given()
                 .contentType(APPLICATION_JSON.toString())
