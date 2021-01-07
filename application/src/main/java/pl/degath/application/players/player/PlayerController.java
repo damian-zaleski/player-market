@@ -1,5 +1,7 @@
 package pl.degath.application.players.player;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,6 +25,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/players")
+@Api("Player operations")
 public class PlayerController {
 
     private final AddPlayerCommandHandler addPlayerCommandHandler;
@@ -41,23 +44,27 @@ public class PlayerController {
     }
 
     @PostMapping
+    @ApiOperation("Add a new player.")
     public void addPlayer(@RequestBody AddPlayerRequest addPlayerRequest) {
         addPlayerCommandHandler.handle(addPlayerRequest.toCommand());
     }
 
     //todo consider Patch
     @PutMapping("{id}")
+    @ApiOperation("Edit existing player.")
     public void updatePlayer(@PathVariable("id") UUID playerId,
                              @RequestBody UpdatePlayerRequest request) {
         updatePlayerCommandHandler.handle(new UpdatePlayer(playerId, request.getPlayerName(), request.getTeamId()));
     }
 
     @DeleteMapping("{id}")
+    @ApiOperation("Remove existing player.")
     public void removePlayer(@PathVariable("id") UUID uuid) {
         removePlayerCommandHandler.handle(new RemovePlayer(uuid));
     }
 
     @GetMapping
+    @ApiOperation("Fetch all players.")
     public Page<Player> getAllPlayers(PaginationRequest paginationRequest) {
         Pagination pagination = PaginationProxy.from(paginationRequest).toDomain();
         return getAllPlayersQueryHandler.handle(new GetAllPlayers(pagination));

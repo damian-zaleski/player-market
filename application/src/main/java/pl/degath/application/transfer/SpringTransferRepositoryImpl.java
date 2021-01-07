@@ -12,7 +12,6 @@ public class SpringTransferRepositoryImpl implements TransferRepository {
     @Autowired
     private SpringTransferRepository springTransferRepository;
 
-
     @Override
     public Optional<Transfer> get(UUID transferId) {
         return springTransferRepository.findById(transferId.toString())
