@@ -28,8 +28,8 @@ public class PlayerEntity {
         this.name = player.getName();
         this.teamId = player.getTeamId().toString();
         this.yearOfBirth = player.getYearOfBirth().toString();
-        this.yearOfCareerStart = String.valueOf(player.getCareerStart().getMonth().getValue());
-        this.monthOfCareerStart = String.valueOf(player.getCareerStart().getYear());
+        this.yearOfCareerStart = String.valueOf(player.getCareerStart().getYear());
+        this.monthOfCareerStart = String.valueOf(player.getCareerStart().getMonthValue());
     }
 
     public String getId() {
