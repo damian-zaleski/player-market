@@ -1,9 +1,11 @@
 package pl.degath.application.players.team;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pl.degath.players.player.Player;
+import pl.degath.players.port.ExternalBankingApi;
 import pl.degath.players.port.Repository;
 import pl.degath.players.team.AddTeamCommandHandler;
 import pl.degath.players.team.GetPlayersTeamsQueryHandler;
@@ -18,6 +20,9 @@ import pl.degath.players.team.UpdateTeamCommandHandler;
 @Configuration
 public class TeamConfiguration {
 
+    @Value("${initial.bank.amount:5000000}")
+    private String initialAmount;
+
     @Autowired
     private Repository<Player> playerRepository;
 
@@ -25,8 +30,8 @@ public class TeamConfiguration {
     private Repository<Team> teamRepository;
 
     @Bean
-    public AddTeamCommandHandler addTeamCommandHandler() {
-        return new AddTeamCommandHandler(teamRepository);
+    public AddTeamCommandHandler addTeamCommandHandler(ExternalBankingApi externalBankingApi) {
+        return new AddTeamCommandHandler(teamRepository, externalBankingApi, initialAmount);
     }
 
     @Bean

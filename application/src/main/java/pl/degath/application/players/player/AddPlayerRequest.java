@@ -7,6 +7,7 @@ import pl.degath.players.player.command.AddPlayer;
 
 import java.time.Year;
 import java.time.YearMonth;
+import java.util.Currency;
 import java.util.UUID;
 
 public class AddPlayerRequest {
@@ -14,16 +15,19 @@ public class AddPlayerRequest {
     private final UUID teamId;
     private final YearMonth careerStart;
     private final Year yearOfBirth;
+    private final String currencyCode;
 
     @JsonCreator
     public AddPlayerRequest(@JsonProperty("name") String name,
                             @JsonProperty("teamId") UUID teamId,
                             @JsonProperty("careerStart") YearMonth careerStart,
-                            @JsonProperty("yearOfBirth") Year yearOfBirth) {
+                            @JsonProperty("yearOfBirth") Year yearOfBirth,
+                            @JsonProperty("currencyCode") String currencyCode) {
         this.name = name;
         this.teamId = teamId;
         this.careerStart = careerStart;
         this.yearOfBirth = yearOfBirth;
+        this.currencyCode = currencyCode;
     }
 
     public String getName() {
@@ -42,8 +46,12 @@ public class AddPlayerRequest {
         return yearOfBirth;
     }
 
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
     @JsonIgnore
     public AddPlayer toCommand() {
-        return new AddPlayer(name, teamId, careerStart, yearOfBirth);
+        return new AddPlayer(name, teamId, careerStart, yearOfBirth, Currency.getInstance(currencyCode));
     }
 }

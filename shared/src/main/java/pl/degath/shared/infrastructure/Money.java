@@ -5,6 +5,8 @@ import java.math.RoundingMode;
 import java.util.Currency;
 
 public class Money {
+    public static Currency USD = Currency.getInstance("USD");
+    public static Currency PLN = Currency.getInstance("PLN");
     private final BigDecimal amount;
     private final Currency currency;
 

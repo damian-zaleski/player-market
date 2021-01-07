@@ -49,7 +49,7 @@ public class PlayerController {
         addPlayerCommandHandler.handle(addPlayerRequest.toCommand());
     }
 
-    //todo consider Patch
+    //todo consider Patch instead of put
     @PutMapping("{id}")
     @ApiOperation("Edit existing player.")
     public void updatePlayer(@PathVariable("id") UUID playerId,
