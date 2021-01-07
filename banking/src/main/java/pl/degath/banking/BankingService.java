@@ -1,5 +1,6 @@
 package pl.degath.banking;
 
+import pl.degath.banking.command.CreateAccount;
 import pl.degath.banking.command.TransferMoney;
 import pl.degath.banking.exception.NotEnoughMoneyException;
 import pl.degath.banking.exception.OwnerNotFoundException;
@@ -13,8 +14,8 @@ import java.math.BigDecimal;
 import java.util.UUID;
 
 public class BankingService implements BankingApi {
-
     private final BankAccountRepository bankAccountRepository;
+
     private final ExternalPlayerApi playerApi;
     private final ExternalTeamApi teamApi;
     private final ExternalCurrencyExchangeApi externalCurrencyExchangeApi;
@@ -30,6 +31,12 @@ public class BankingService implements BankingApi {
     }
 
     @Override
+    public void createAccount(CreateAccount createAccount) {
+        this.validateOwnerExistence(createAccount.getOwnerId());
+        bankAccountRepository.save(new BankAccount(UUID.randomUUID(), createAccount.getOwnerId(), createAccount.getMoney()));
+    }
+
+    @Override
     public void transferMoney(TransferMoney command) {
         BankAccount fromAccount = this.getBankAccount(command.getFromOwnerId());
         BankAccount toAccount = this.getBankAccount(command.getToOwnerId());
@@ -40,12 +47,12 @@ public class BankingService implements BankingApi {
     private BankAccount getBankAccount(UUID ownerId) {
         this.validateOwnerExistence(ownerId);
         return bankAccountRepository.getByOwnerId(ownerId)
-                .orElseThrow(OwnerNotFoundException::new);
+                .orElseThrow(() -> new OwnerNotFoundException(ownerId));
     }
 
     private void validateOwnerExistence(UUID id) {
         if (!this.ownerExists(id)) {
-            throw new OwnerNotFoundException();
+            throw new OwnerNotFoundException(id);
         }
     }
 

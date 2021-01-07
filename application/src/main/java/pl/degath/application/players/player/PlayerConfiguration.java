@@ -8,6 +8,7 @@ import pl.degath.players.player.GetAllPlayersQueryHandler;
 import pl.degath.players.player.Player;
 import pl.degath.players.player.RemovePlayerCommandHandler;
 import pl.degath.players.player.UpdatePlayerCommandHandler;
+import pl.degath.players.port.ExternalBankingApi;
 import pl.degath.players.port.Repository;
 import pl.degath.players.team.Team;
 
@@ -21,8 +22,8 @@ public class PlayerConfiguration {
     private Repository<Team> teamRepository;
 
     @Bean
-    public AddPlayerCommandHandler addPlayerCommandHandler() {
-        return new AddPlayerCommandHandler(playerRepository, teamRepository);
+    public AddPlayerCommandHandler addPlayerCommandHandler(ExternalBankingApi externalBankingApi) {
+        return new AddPlayerCommandHandler(playerRepository, teamRepository, externalBankingApi);
     }
 
     @Bean
@@ -36,7 +37,7 @@ public class PlayerConfiguration {
     }
 
     @Bean
-    public UpdatePlayerCommandHandler updatePlayerCommandHandler(Repository<Player> playerRepository, Repository<Team> teamRepository) {
+    public UpdatePlayerCommandHandler updatePlayerCommandHandler() {
         return new UpdatePlayerCommandHandler(playerRepository, teamRepository);
     }
 }

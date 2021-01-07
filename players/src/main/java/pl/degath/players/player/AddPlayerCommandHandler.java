@@ -2,11 +2,14 @@ package pl.degath.players.player;
 
 import pl.degath.players.player.command.AddPlayer;
 import pl.degath.players.player.exception.PlayerAlreadyExistsException;
+import pl.degath.players.port.ExternalBankingApi;
 import pl.degath.players.port.Repository;
 import pl.degath.players.team.Team;
 import pl.degath.players.team.exception.TeamNotFoundException;
 import pl.degath.shared.infrastructure.CommandHandler;
+import pl.degath.shared.infrastructure.Money;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.UUID;
@@ -15,10 +18,12 @@ public class AddPlayerCommandHandler implements CommandHandler<AddPlayer> {
 
     private final Repository<Player> playerRepository;
     private final Repository<Team> teamRepository;
+    private final ExternalBankingApi externalBankingApi;
 
-    public AddPlayerCommandHandler(Repository<Player> playerRepository, Repository<Team> teamRepository) {
+    public AddPlayerCommandHandler(Repository<Player> playerRepository, Repository<Team> teamRepository, ExternalBankingApi externalBankingApi) {
         this.playerRepository = Objects.requireNonNull(playerRepository, "Player repository cannot be null.");
         this.teamRepository = Objects.requireNonNull(teamRepository, "Team repository cannot be null.");
+        this.externalBankingApi = Objects.requireNonNull(externalBankingApi, "External banking API cannot be null.");
     }
 
     @Override
@@ -29,8 +34,9 @@ public class AddPlayerCommandHandler implements CommandHandler<AddPlayer> {
         //todo validate career start. probably after birth before today
 
         Player newPlayer = new Player(UUID.randomUUID(), command.getName(), command.getTeamId(), command.getYearOfBirth(), command.getCareerStart());
-        playerRepository.save(newPlayer);
-        //todo consider automatically create account to simplify the whole process
+        Player createdPlayer = playerRepository.save(newPlayer);
+
+        externalBankingApi.createAccount(createdPlayer.getId(), new Money(new BigDecimal("0"), command.getCurrency()));
     }
 
     private void validatePlayerName(String playerName) {

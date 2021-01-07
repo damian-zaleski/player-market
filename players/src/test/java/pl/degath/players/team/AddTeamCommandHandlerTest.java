@@ -2,12 +2,14 @@ package pl.degath.players.team;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import pl.degath.players.FakeBankingService;
 import pl.degath.players.TeamBuilder;
-import pl.degath.shared.infrastructure.CommandHandler;
+import pl.degath.players.port.ExternalBankingApi;
 import pl.degath.players.port.InMemoryRepository;
 import pl.degath.players.port.Repository;
 import pl.degath.players.team.command.AddTeam;
 import pl.degath.players.team.exception.TeamAlreadyExistsException;
+import pl.degath.shared.infrastructure.CommandHandler;
 
 import java.util.Currency;
 
@@ -22,7 +24,8 @@ class AddTeamCommandHandlerTest {
     @BeforeEach
     void setUp() {
         teamRepository = new InMemoryRepository<>();
-        addTeamCommandHandler = new AddTeamCommandHandler(teamRepository);
+        ExternalBankingApi fakeBankingService = new FakeBankingService();
+        addTeamCommandHandler = new AddTeamCommandHandler(teamRepository, fakeBankingService, "1000");
     }
 
     @Test

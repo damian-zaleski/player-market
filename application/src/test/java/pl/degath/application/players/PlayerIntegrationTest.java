@@ -7,6 +7,7 @@ import pl.degath.application.players.player.UpdatePlayerRequest;
 import pl.degath.players.player.Player;
 import pl.degath.players.port.Repository;
 import pl.degath.players.team.Team;
+import pl.degath.shared.infrastructure.Money;
 
 import java.time.Year;
 import java.time.YearMonth;
@@ -31,13 +32,15 @@ public class PlayerIntegrationTest extends RestIntegrationTest {
                 "John Snow",
                 existingTeam.getId(),
                 YearMonth.of(2001, 11),
-                Year.of(1985));
+                Year.of(1985),
+                Money.USD.getCurrencyCode());
 
         given()
                 .contentType(APPLICATION_JSON.toString())
                 .body(request)
                 .post("/api/v1/players")
                 .then()
+                .log().all()
                 .statusCode(200);
     }
 

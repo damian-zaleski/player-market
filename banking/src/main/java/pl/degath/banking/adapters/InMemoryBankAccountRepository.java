@@ -4,7 +4,6 @@ import pl.degath.banking.BankAccount;
 import pl.degath.banking.port.BankAccountRepository;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
@@ -29,9 +28,5 @@ public class InMemoryBankAccountRepository implements BankAccountRepository {
     public BankAccount save(BankAccount entity) {
         entities.put(entity.getId(), entity);
         return entity;
-    }
-
-    public List<BankAccount> getAll() {
-        return List.copyOf(entities.values());
     }
 }

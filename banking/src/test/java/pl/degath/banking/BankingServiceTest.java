@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pl.degath.banking.adapters.InMemoryBankAccountRepository;
+import pl.degath.banking.command.CreateAccount;
 import pl.degath.banking.command.TransferMoney;
 import pl.degath.banking.exception.NotEnoughMoneyException;
 import pl.degath.banking.exception.OwnerNotFoundException;
@@ -36,6 +37,30 @@ class BankingServiceTest {
         ExternalTeamApi externalTeamApi = new FakeExternalTeamService();
         bankingApi = new BankingService(bankAccountRepository, externalPlayerApi, externalTeamApi, externalCurrencyExchangeApi);
         bankAccountBuilder = new BankAccountBuilder(bankAccountRepository);
+    }
+
+    @Test
+    @DisplayName("Should be able to create bank account.")
+    void createAccount() {
+        var existingOwnerId = UUID.fromString("8bedaa6d-558f-40da-95cb-c8c4f03be310");
+        var validCommand = new CreateAccount(existingOwnerId, new Money(new BigDecimal("5"), Money.PLN));
+
+        bankingApi.createAccount(validCommand);
+
+        assertThat(bankAccountRepository.getByOwnerId(existingOwnerId)).isNotNull();
+    }
+
+    @Test
+    @DisplayName("Cannot create account if owner not found.")
+    void createAccount_notRecognizedOwnerId() {
+        UUID notExistingOwnerId = UUID.randomUUID();
+        CreateAccount whenNotRecognizedOwnerId = new CreateAccount(notExistingOwnerId, new Money(new BigDecimal("5"), Money.PLN));
+
+        Throwable thrown = catchThrowable(() -> bankingApi.createAccount(whenNotRecognizedOwnerId));
+
+        assertThat(thrown)
+                .isInstanceOf(OwnerNotFoundException.class)
+                .hasMessage(String.format("Owner (player or team) with id [%s] does not exist.", notExistingOwnerId));
     }
 
     @Test
@@ -116,7 +141,8 @@ class BankingServiceTest {
         Throwable thrown = catchThrowable(() -> bankingApi.transferMoney(command));
 
         assertThat(thrown)
-                .isInstanceOf(OwnerNotFoundException.class);
+                .isInstanceOf(OwnerNotFoundException.class)
+                .hasMessage(String.format("Owner (player or team) with id [%s] does not exist.", fromOwner.getOwnerId()));
     }
 
     private Money of(String amount, Currency currency) {

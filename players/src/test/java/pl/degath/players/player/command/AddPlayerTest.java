@@ -3,6 +3,7 @@ package pl.degath.players.player.command;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import pl.degath.shared.infrastructure.Money;
 import pl.degath.shared.infrastructure.ValidationException;
 
 import java.time.Year;
@@ -19,7 +20,7 @@ class AddPlayerTest {
     @ParameterizedTest
     @ValueSource(strings = {"", "            "})
     void addPlayer_withBlankName_throwsException(String input) {
-        Throwable thrown = catchThrowable(() -> new AddPlayer(input, NOT_EXISTING_TEAM_ID, YearMonth.of(2010,10), Year.of(2010)));
+        Throwable thrown = catchThrowable(() -> new AddPlayer(input, NOT_EXISTING_TEAM_ID, YearMonth.of(2010, 10), Year.of(2010), Money.PLN));
 
         assertThat(thrown)
                 .isInstanceOf(ValidationException.class)
@@ -28,7 +29,7 @@ class AddPlayerTest {
 
     @Test
     void addPlayer_withMissingName_throwsException() {
-        Throwable thrown = catchThrowable(() -> new AddPlayer(null, NOT_EXISTING_TEAM_ID, YearMonth.of(2010,10), Year.of(2010)));
+        Throwable thrown = catchThrowable(() -> new AddPlayer(null, NOT_EXISTING_TEAM_ID, YearMonth.of(2010, 10), Year.of(2010), Money.USD));
 
         assertThat(thrown)
                 .isInstanceOf(ValidationException.class)
