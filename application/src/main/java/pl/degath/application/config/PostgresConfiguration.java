@@ -2,6 +2,7 @@ package pl.degath.application.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import pl.degath.application.banking.SpringBankAccountRepositoryImpl;
 import pl.degath.application.players.player.SpringPlayerRepositoryImpl;
@@ -18,21 +19,25 @@ import pl.degath.transfer.port.TransferRepository;
 public class PostgresConfiguration {
 
     @Bean
+    @Primary
     public Repository<Player> playerRepository() {
         return new SpringPlayerRepositoryImpl();
     }
 
     @Bean
+    @Primary
     public Repository<Team> teamRepository() {
         return new SpringTeamRepositoryImpl();
     }
 
     @Bean
-    public BankAccountRepository bankRepository() {
+    @Primary
+    public BankAccountRepository bankAccountRepository() {
         return new SpringBankAccountRepositoryImpl();
     }
 
     @Bean
+    @Primary
     public TransferRepository transferRepository() {
         return new SpringTransferRepositoryImpl();
     }
