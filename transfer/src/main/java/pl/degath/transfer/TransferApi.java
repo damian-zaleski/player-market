@@ -2,6 +2,6 @@ package pl.degath.transfer;
 
 import pl.degath.transfer.command.StartNewTransfer;
 
-interface TransferApi {
+public interface TransferApi {
     void startNewTransfer(StartNewTransfer command);
 }

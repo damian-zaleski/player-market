@@ -3,6 +3,8 @@ package pl.degath.players;
 import pl.degath.players.port.Repository;
 import pl.degath.players.team.Team;
 
+import java.util.UUID;
+
 public class TeamBuilder {
 
     private final Repository<Team> teamRepository;
@@ -18,7 +20,7 @@ public class TeamBuilder {
     }
 
     private Team build() {
-        return new Team(teamName);
+        return new Team(UUID.randomUUID(), teamName);
     }
 
     public Team inDb() {

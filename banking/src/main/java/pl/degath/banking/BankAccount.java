@@ -10,7 +10,8 @@ public class BankAccount extends Entity {
     private final UUID ownerId;
     private Money balance;
 
-    public BankAccount(UUID ownerId, Money balance) {
+    public BankAccount(UUID id, UUID ownerId, Money balance) {
+        super(id);
         this.ownerId = ownerId;
         this.balance = balance;
     }

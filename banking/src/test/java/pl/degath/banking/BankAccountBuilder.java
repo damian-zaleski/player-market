@@ -31,7 +31,7 @@ class BankAccountBuilder {
     }
 
     private BankAccount build() {
-        return new BankAccount(ownerId, balance);
+        return new BankAccount(UUID.randomUUID(), ownerId, balance);
     }
 
     BankAccount inDb() {

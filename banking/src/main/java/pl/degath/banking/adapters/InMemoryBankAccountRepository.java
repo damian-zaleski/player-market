@@ -1,5 +1,6 @@
-package pl.degath.banking;
+package pl.degath.banking.adapters;
 
+import pl.degath.banking.BankAccount;
 import pl.degath.banking.port.BankAccountRepository;
 
 import java.util.HashMap;
