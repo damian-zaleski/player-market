@@ -14,6 +14,10 @@ public class AddTeamRequest {
         this.name = name;
     }
 
+    public String getName() {
+        return name;
+    }
+
     @JsonIgnore
     public AddTeam toCommand() {
         return new AddTeam(name);

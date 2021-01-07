@@ -3,6 +3,7 @@ package pl.degath.banking;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pl.degath.banking.adapters.InMemoryBankAccountRepository;
 import pl.degath.banking.command.TransferMoney;
 import pl.degath.banking.exception.NotEnoughMoneyException;
 import pl.degath.banking.exception.OwnerNotFoundException;

@@ -12,7 +12,7 @@ public final class PlayerBuilder {
 
     private final Repository<Player> playerRepository;
     private final Repository<Team> teamRepository;
-    private final Team team = new Team("Best Team Ever");
+    private final Team team = new Team(UUID.randomUUID(), "Best Team Ever");
     private UUID teamId = team.getId();
 
     private String playerName = "Jan Kowalski";
