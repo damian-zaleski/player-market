@@ -1,0 +1,10 @@
+version: '3.7'
+
+services:
+  application:
+    container_name: player-market-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
