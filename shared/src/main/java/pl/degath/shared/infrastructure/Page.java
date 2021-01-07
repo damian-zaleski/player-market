@@ -7,7 +7,7 @@ public class Page<T> {
     private final int pagesCount;
     private final int currentPage;
 
-    Page(List<T> result, int pagesCount, int currentPage) {
+    public Page(List<T> result, int pagesCount, int currentPage) {
         this.result = result;
         this.pagesCount = pagesCount;
         this.currentPage = currentPage;

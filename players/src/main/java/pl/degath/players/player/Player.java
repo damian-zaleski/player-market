@@ -14,7 +14,8 @@ public class Player extends Entity {
     private final Year yearOfBirth;
     private final YearMonth careerStart;
 
-    public Player(String name, UUID teamId, Year yearOfBirth, YearMonth careerStart) {
+    public Player(UUID id, String name, UUID teamId, Year yearOfBirth, YearMonth careerStart) {
+        super(id);
         this.name = Validator.notBlank(name, "name has to be specified");
         this.teamId = teamId;
         this.yearOfBirth = Objects.requireNonNull(yearOfBirth, "Year of birth has to be specified.");

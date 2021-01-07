@@ -28,7 +28,7 @@ public class AddPlayerCommandHandler implements CommandHandler<AddPlayer> {
         //todo validate year of birth. probably 18+
         //todo validate career start. probably after birth before today
 
-        Player newPlayer = new Player(command.getName(), command.getTeamId(), command.getYearOfBirth(), command.getCareerStart());
+        Player newPlayer = new Player(UUID.randomUUID(), command.getName(), command.getTeamId(), command.getYearOfBirth(), command.getCareerStart());
         playerRepository.save(newPlayer);
         //todo consider automatically create account to simplify the whole process
     }

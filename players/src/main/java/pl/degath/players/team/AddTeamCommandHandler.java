@@ -6,6 +6,7 @@ import pl.degath.players.team.exception.TeamAlreadyExistsException;
 import pl.degath.shared.infrastructure.CommandHandler;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class AddTeamCommandHandler implements CommandHandler<AddTeam> {
 
@@ -19,7 +20,7 @@ public class AddTeamCommandHandler implements CommandHandler<AddTeam> {
     public void handle(AddTeam command) {
         this.validateUniqueName(command.getTeamName());
 
-        Team newTeam = new Team(command.getTeamName());
+        Team newTeam = new Team(UUID.randomUUID(), command.getTeamName());
         teamRepository.save(newTeam);
         //todo consider automatically create account to simplify the whole process
     }
