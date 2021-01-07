@@ -5,6 +5,7 @@ import pl.degath.players.team.Team;
 
 import java.time.Year;
 import java.time.YearMonth;
+import java.util.Currency;
 import java.util.UUID;
 
 public class Fixtures {
@@ -13,7 +14,7 @@ public class Fixtures {
     }
 
     static Team team() {
-        return new Team(UUID.randomUUID(), "TeamName");
+        return new Team(UUID.randomUUID(), "TeamName", Currency.getInstance("USD"));
     }
 
     static Player player(UUID teamId) {

@@ -14,7 +14,8 @@ public class SpringBankAccountRepositoryImpl implements BankAccountRepository {
 
     @Override
     public Optional<BankAccount> getByOwnerId(UUID ownerId) {
-        return springBankAccountRepository.findByOwnerId(ownerId.toString());
+        return springBankAccountRepository.findByOwnerId(ownerId.toString())
+                .map(BankAccountEntity::toDomain);
     }
 
     @Override

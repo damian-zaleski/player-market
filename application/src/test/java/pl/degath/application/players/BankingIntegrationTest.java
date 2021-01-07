@@ -39,7 +39,7 @@ public class BankingIntegrationTest extends RestIntegrationTest {
     }
 
     private BankAccount existingBankAccount(String teamName) {
-        Team existingTeam = teamRepository.save(new Team(UUID.randomUUID(), teamName));
+        Team existingTeam = teamRepository.save(new Team(UUID.randomUUID(), teamName, Currency.getInstance("USD")));
         var bankAccount = new BankAccount(UUID.randomUUID(), existingTeam.getId(), new Money(new BigDecimal("500000000"), Currency.getInstance("USD")));
         bankAccountRepository.save(bankAccount);
         return bankAccount;

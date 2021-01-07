@@ -1,5 +1,6 @@
-package pl.degath.transfer;
+package pl.degath.transfer.adapters;
 
+import pl.degath.transfer.Transfer;
 import pl.degath.transfer.port.TransferRepository;
 
 import java.util.HashMap;

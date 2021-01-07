@@ -10,6 +10,7 @@ import pl.degath.players.team.Team;
 
 import java.time.Year;
 import java.time.YearMonth;
+import java.util.Currency;
 import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
@@ -25,7 +26,7 @@ public class PlayerIntegrationTest extends RestIntegrationTest {
 
     @Test
     void add() {
-        Team existingTeam = teamRepository.save(new Team(UUID.randomUUID(), "TeamName"));
+        Team existingTeam = teamRepository.save(new Team(UUID.randomUUID(), "TeamName", Currency.getInstance("USD")));
         AddPlayerRequest request = new AddPlayerRequest(
                 "John Snow",
                 existingTeam.getId(),

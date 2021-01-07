@@ -9,6 +9,8 @@ import pl.degath.players.player.Player;
 import pl.degath.players.port.InMemoryRepository;
 import pl.degath.players.port.Repository;
 import pl.degath.players.team.Team;
+import pl.degath.transfer.adapters.InMemoryTransferRepository;
+import pl.degath.transfer.port.TransferRepository;
 
 @Configuration
 @Profile("!postgres")
@@ -27,5 +29,10 @@ public class InMemoryConfiguration {
     @Bean
     public BankAccountRepository bankAccountRepository() {
         return new InMemoryBankAccountRepository();
+    }
+
+    @Bean
+    public TransferRepository transferRepository() {
+        return new InMemoryTransferRepository();
     }
 }

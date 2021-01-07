@@ -9,6 +9,8 @@ import pl.degath.players.port.Repository;
 import pl.degath.players.team.command.AddTeam;
 import pl.degath.players.team.exception.TeamAlreadyExistsException;
 
+import java.util.Currency;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.catchThrowable;
 
@@ -26,7 +28,7 @@ class AddTeamCommandHandlerTest {
     @Test
     void addTeam_withUniqueTeamName_addsTeam() {
         var notExistingTeamName = "Fresh awesome team";
-        var validCommand = new AddTeam(notExistingTeamName);
+        var validCommand = new AddTeam(notExistingTeamName, Currency.getInstance("USD"));
 
         addTeamCommandHandler.handle(validCommand);
 
@@ -37,7 +39,7 @@ class AddTeamCommandHandlerTest {
     @Test
     void addTeam_withNotUniqueTeamName_throwsException() {
         String existingTeamName = new TeamBuilder(teamRepository).inDb().getName();
-        AddTeam validCommand = new AddTeam(existingTeamName);
+        AddTeam validCommand = new AddTeam(existingTeamName, Currency.getInstance("USD"));
 
         Throwable thrown = catchThrowable(() -> addTeamCommandHandler.handle(validCommand));
 

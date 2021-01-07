@@ -3,10 +3,10 @@ package pl.degath.transfer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import pl.degath.transfer.adapters.InMemoryTransferRepository;
 import pl.degath.transfer.command.StartNewTransfer;
 
 import java.math.BigDecimal;
-import java.time.Clock;
 import java.time.Year;
 import java.time.YearMonth;
 import java.util.Currency;
@@ -98,7 +98,7 @@ class TransferServiceTest {
     }
 
     private Player existingPlayer() {
-        return fakePlayerApi.add(new Player(UUID.randomUUID(), existingTeam().getId(), Clock.systemUTC(), Year.of(1999), YearMonth.of(2015, 11)));
+        return fakePlayerApi.add(new Player(UUID.randomUUID(), existingTeam().getId(), Year.of(1999), YearMonth.of(2015, 11)));
     }
 
     private Team existingTeam() {
