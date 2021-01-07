@@ -33,7 +33,7 @@ public final class PlayerBuilder {
     }
 
     private Player build() {
-        return new Player(playerName, teamId, Year.of(2010), YearMonth.of(2010, 10));
+        return new Player(UUID.randomUUID(), playerName, teamId, Year.of(2010), YearMonth.of(2010, 10));
     }
 
     public Player inDb() {

@@ -3,4 +3,5 @@ include 'players'
 include 'transfer'
 include 'shared'
 include 'banking'
+include 'application'
 

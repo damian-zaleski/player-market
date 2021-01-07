@@ -66,4 +66,12 @@ public class Pagination {
             return last;
         }
     }
+
+    public int getItemsPerPage() {
+        return itemsPerPage;
+    }
+
+    public int getPageNumber() {
+        return pageNumber;
+    }
 }

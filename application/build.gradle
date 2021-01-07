@@ -1,0 +1,36 @@
+plugins {
+    id 'org.springframework.boot' version '2.3.7.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+}
+group = 'pl.degath'
+sourceCompatibility = '11'
+
+repositories {
+    mavenCentral()
+}
+
+bootRun {
+    systemProperty "spring.profiles.active", "memory"
+}
+
+dependencies {
+    implementation project(':players')
+    implementation project(':banking')
+    implementation project(':shared')
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+
+    runtimeOnly 'org.postgresql:postgresql'
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+    testImplementation 'io.rest-assured:rest-assured:3.3.0'
+}
+test {
+    useJUnitPlatform()
+}
